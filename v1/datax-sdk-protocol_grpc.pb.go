@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: datax-sdk-protocol.proto
+// source: v1/datax-sdk-protocol.proto
 
-package protocol
+package v1
 
 import (
 	context "context"
@@ -37,7 +37,7 @@ func NewDataXClient(cc grpc.ClientConnInterface) DataXClient {
 
 func (c *dataXClient) Initialize(ctx context.Context, in *Settings, opts ...grpc.CallOption) (*Initialization, error) {
 	out := new(Initialization)
-	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.DataX/Initialize", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.v1.DataX/Initialize", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *dataXClient) Initialize(ctx context.Context, in *Settings, opts ...grpc
 
 func (c *dataXClient) Next(ctx context.Context, in *NextOptions, opts ...grpc.CallOption) (*NextMessage, error) {
 	out := new(NextMessage)
-	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.DataX/Next", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.v1.DataX/Next", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *dataXClient) Next(ctx context.Context, in *NextOptions, opts ...grpc.Ca
 
 func (c *dataXClient) Emit(ctx context.Context, in *EmitMessage, opts ...grpc.CallOption) (*EmitResult, error) {
 	out := new(EmitResult)
-	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.DataX/Emit", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.v1.DataX/Emit", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func _DataX_Initialize_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/datax.sdk.protocol.DataX/Initialize",
+		FullMethod: "/datax.sdk.protocol.v1.DataX/Initialize",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DataXServer).Initialize(ctx, req.(*Settings))
@@ -126,7 +126,7 @@ func _DataX_Next_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/datax.sdk.protocol.DataX/Next",
+		FullMethod: "/datax.sdk.protocol.v1.DataX/Next",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DataXServer).Next(ctx, req.(*NextOptions))
@@ -144,7 +144,7 @@ func _DataX_Emit_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/datax.sdk.protocol.DataX/Emit",
+		FullMethod: "/datax.sdk.protocol.v1.DataX/Emit",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DataXServer).Emit(ctx, req.(*EmitMessage))
@@ -156,7 +156,7 @@ func _DataX_Emit_Handler(srv interface{}, ctx context.Context, dec func(interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DataX_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "datax.sdk.protocol.DataX",
+	ServiceName: "datax.sdk.protocol.v1.DataX",
 	HandlerType: (*DataXServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -173,5 +173,5 @@ var DataX_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "datax-sdk-protocol.proto",
+	Metadata: "v1/datax-sdk-protocol.proto",
 }

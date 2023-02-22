@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package datax.sdk.protocol;
+package datax.sdk.protocol.v1;
 
-option go_package = "github.com/nla-is/datax-sdk-protocol;protocol";
+option go_package = "github.com/nla-is/datax-sdk-protocol/v1;v1";
 
 import "google/protobuf/struct.proto";
 
@@ -16,21 +16,21 @@ message Settings {
 }
 
 message Initialization {
-  optional google.protobuf.Struct configuration = 1;
+  google.protobuf.Struct configuration = 1;
 }
 
 message NextOptions {
 }
 
 message NextMessage {
-  optional string reference = 1;
-  optional string stream = 2;
-  optional google.protobuf.Struct message = 3;
+  string reference = 1;
+  google.protobuf.Struct message = 2;
+  optional string stream = 3;
 }
 
 message EmitMessage {
-  optional string reference = 1;
-  optional google.protobuf.Struct message = 2;
+  google.protobuf.Struct message = 1;
+  optional string reference = 2;
 }
 
 message EmitResult {
