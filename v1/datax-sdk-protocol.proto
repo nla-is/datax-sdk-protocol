@@ -25,7 +25,7 @@ message NextOptions {
 message NextMessage {
   string reference = 1;
   google.protobuf.Struct message = 2;
-  optional string stream = 3;
+  string stream = 3;
 }
 
 message EmitMessage {
