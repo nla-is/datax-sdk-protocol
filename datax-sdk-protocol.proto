@@ -16,6 +16,7 @@ message Settings {
 }
 
 message Initialization {
+  optional google.protobuf.Struct configuration = 1;
 }
 
 message NextOptions {
