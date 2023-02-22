@@ -24,12 +24,12 @@ message NextOptions {
 
 message NextMessage {
   string reference = 1;
-  google.protobuf.Struct message = 2;
-  string stream = 3;
+  string stream = 2;
+  bytes data = 3;
 }
 
 message EmitMessage {
-  google.protobuf.Struct message = 1;
+  bytes data = 1;
   optional string reference = 2;
 }
 
