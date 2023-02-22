@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package datax.sdk.protocol;
+
+option go_package = "github.com/nla-is/datax-sdk-protocol;protocol";
+
+import "google/protobuf/struct.proto";
+
+service DataX {
+  rpc Initialize(Settings) returns(Initialization) {}
+  rpc Next(NextOptions) returns(NextMessage) {}
+  rpc Emit(EmitMessage) returns(EmitResult) {}
+}
+
+message Settings {
+}
+
+message Initialization {
+}
+
+message NextOptions {
+}
+
+message NextMessage {
+  optional string reference = 1;
+  optional string stream = 2;
+  optional google.protobuf.Struct message = 3;
+}
+
+message EmitMessage {
+  optional string reference = 1;
+  optional google.protobuf.Struct message = 2;
+}
+
+message EmitResult {
+}
