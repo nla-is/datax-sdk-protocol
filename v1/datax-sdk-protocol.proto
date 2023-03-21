@@ -13,10 +13,13 @@ service DataX {
 }
 
 message Settings {
+  bool optimizedDataChannel = 1;
 }
 
 message Initialization {
   google.protobuf.Struct configuration = 1;
+  string outputChannelPath = 2;
+  string inputChannelPath = 3;
 }
 
 message NextOptions {
