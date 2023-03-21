@@ -29,11 +29,13 @@ message NextMessage {
   string reference = 1;
   string stream = 2;
   bytes data = 3;
+  uint32 dataSize = 4;
 }
 
 message EmitMessage {
   bytes data = 1;
   string reference = 2;
+  uint32 dataSize = 3;
 }
 
 message EmitResult {
