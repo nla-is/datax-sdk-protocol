@@ -18,8 +18,8 @@ message Settings {
 
 message Initialization {
   google.protobuf.Struct configuration = 1;
-  string outputChannelPath = 2;
-  string inputChannelPath = 3;
+  string nextChannelPath = 2;
+  string emitChannelPath = 3;
 }
 
 message NextOptions {
