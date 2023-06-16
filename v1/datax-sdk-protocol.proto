@@ -13,13 +13,11 @@ service DataX {
 }
 
 message Settings {
-  bool optimizedDataChannel = 1;
 }
 
 message Initialization {
   google.protobuf.Struct configuration = 1;
-  string nextChannelPath = 2;
-  string emitChannelPath = 3;
+  bool with_fan_out = 2;
 }
 
 message NextOptions {
@@ -29,13 +27,11 @@ message NextMessage {
   string reference = 1;
   string stream = 2;
   bytes data = 3;
-  uint32 dataSize = 4;
 }
 
 message EmitMessage {
   bytes data = 1;
   string reference = 2;
-  uint32 dataSize = 3;
 }
 
 message EmitResult {
