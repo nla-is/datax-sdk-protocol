@@ -1,6 +1,6 @@
-module github.com/nla-is/datax-sdk-protocol
+module github.com/nla-is/datax-sdk-protocol/v2
 
-go 1.19
+go 1.20
 
 require (
 	google.golang.org/grpc v1.53.0
