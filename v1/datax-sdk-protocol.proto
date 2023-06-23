@@ -4,8 +4,6 @@ package datax.sdk.protocol.v1;
 
 option go_package = "github.com/nla-is/datax-sdk-protocol/v1;v1";
 
-import "google/protobuf/struct.proto";
-
 service DataX {
   rpc Initialize(Settings) returns(Initialization) {}
   rpc Next(NextOptions) returns(NextMessage) {}
@@ -16,7 +14,6 @@ message Settings {
 }
 
 message Initialization {
-  google.protobuf.Struct configuration = 1;
 }
 
 message NextOptions {
