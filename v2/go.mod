@@ -1,4 +1,4 @@
-module github.com/nla-is/datax-sdk-protocol
+module github.com/nla-is/datax-sdk-protocol/v2
 
 go 1.20
 
