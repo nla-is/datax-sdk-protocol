@@ -8,6 +8,13 @@ service DataX {
   rpc Initialize(Settings) returns(Initialization) {}
   rpc Next(NextOptions) returns(NextMessage) {}
   rpc Emit(EmitMessage) returns(EmitResult) {}
+
+  // Backend API
+  rpc GetRequest(GetRequestOptions) returns (Request);
+  rpc ReplyRequest(Reply) returns (ReplyResult);
+
+  // Backend client API
+  rpc SubmitRequest(Request) returns (Reply);
 }
 
 message Settings {
@@ -31,4 +38,19 @@ message EmitMessage {
 }
 
 message EmitResult {
+}
+
+message GetRequestOptions {
+}
+
+message Request {
+  string sender = 1;
+  bytes data = 2;
+}
+
+message Reply {
+  bytes data = 1;
+}
+
+message ReplyResult {
 }
