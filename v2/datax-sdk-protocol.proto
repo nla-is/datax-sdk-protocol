@@ -45,7 +45,8 @@ message GetRequestOptions {
 
 message Request {
   string sender = 1;
-  bytes data = 2;
+  string backend = 2;
+  bytes data = 3;
 }
 
 message Reply {
