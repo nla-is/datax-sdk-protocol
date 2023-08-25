@@ -46,11 +46,11 @@ message GetRequestOptions {
 message Request {
   string sender = 1;
   string backend = 2;
-  bytes data = 3;
+  repeated bytes data = 3;
 }
 
 message Reply {
-  bytes data = 1;
+  repeated bytes data = 1;
 }
 
 message ReplyResult {
