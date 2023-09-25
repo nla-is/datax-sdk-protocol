@@ -9,6 +9,8 @@ service DataX {
   rpc Next(NextOptions) returns(NextMessage) {}
   rpc Emit(EmitMessage) returns(EmitResult) {}
 
+  rpc FanOut(FanOutRequest) returns (FanOutResponse);
+
   // Backend API
   rpc GetRequest(GetRequestOptions) returns (Request);
   rpc ReplyRequest(Reply) returns (ReplyResult);
@@ -54,4 +56,13 @@ message Reply {
 }
 
 message ReplyResult {
+}
+
+message FanOutRequest {
+  // fan-out data serialization is handled by the SDK, preferably utilizing language-specific serialization methods
+  repeated bytes data = 1;
+}
+
+message FanOutResponse {
+  repeated bytes data = 2;
 }

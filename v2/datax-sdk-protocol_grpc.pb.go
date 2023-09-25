@@ -25,6 +25,7 @@ type DataXClient interface {
 	Initialize(ctx context.Context, in *Settings, opts ...grpc.CallOption) (*Initialization, error)
 	Next(ctx context.Context, in *NextOptions, opts ...grpc.CallOption) (*NextMessage, error)
 	Emit(ctx context.Context, in *EmitMessage, opts ...grpc.CallOption) (*EmitResult, error)
+	FanOut(ctx context.Context, in *FanOutRequest, opts ...grpc.CallOption) (*FanOutResponse, error)
 	// Backend API
 	GetRequest(ctx context.Context, in *GetRequestOptions, opts ...grpc.CallOption) (*Request, error)
 	ReplyRequest(ctx context.Context, in *Reply, opts ...grpc.CallOption) (*ReplyResult, error)
@@ -67,6 +68,15 @@ func (c *dataXClient) Emit(ctx context.Context, in *EmitMessage, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *dataXClient) FanOut(ctx context.Context, in *FanOutRequest, opts ...grpc.CallOption) (*FanOutResponse, error) {
+	out := new(FanOutResponse)
+	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.v2.DataX/FanOut", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *dataXClient) GetRequest(ctx context.Context, in *GetRequestOptions, opts ...grpc.CallOption) (*Request, error) {
 	out := new(Request)
 	err := c.cc.Invoke(ctx, "/datax.sdk.protocol.v2.DataX/GetRequest", in, out, opts...)
@@ -101,6 +111,7 @@ type DataXServer interface {
 	Initialize(context.Context, *Settings) (*Initialization, error)
 	Next(context.Context, *NextOptions) (*NextMessage, error)
 	Emit(context.Context, *EmitMessage) (*EmitResult, error)
+	FanOut(context.Context, *FanOutRequest) (*FanOutResponse, error)
 	// Backend API
 	GetRequest(context.Context, *GetRequestOptions) (*Request, error)
 	ReplyRequest(context.Context, *Reply) (*ReplyResult, error)
@@ -121,6 +132,9 @@ func (UnimplementedDataXServer) Next(context.Context, *NextOptions) (*NextMessag
 }
 func (UnimplementedDataXServer) Emit(context.Context, *EmitMessage) (*EmitResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Emit not implemented")
+}
+func (UnimplementedDataXServer) FanOut(context.Context, *FanOutRequest) (*FanOutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FanOut not implemented")
 }
 func (UnimplementedDataXServer) GetRequest(context.Context, *GetRequestOptions) (*Request, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRequest not implemented")
@@ -198,6 +212,24 @@ func _DataX_Emit_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DataX_FanOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FanOutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataXServer).FanOut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/datax.sdk.protocol.v2.DataX/FanOut",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataXServer).FanOut(ctx, req.(*FanOutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DataX_GetRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequestOptions)
 	if err := dec(in); err != nil {
@@ -270,6 +302,10 @@ var DataX_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Emit",
 			Handler:    _DataX_Emit_Handler,
+		},
+		{
+			MethodName: "FanOut",
+			Handler:    _DataX_FanOut_Handler,
 		},
 		{
 			MethodName: "GetRequest",
